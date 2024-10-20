@@ -50,8 +50,8 @@ export async function scrapeTumblrPost(
     );
 
   return {
-    author: blog.name,
-    handle: null,
+    author: null,
+    handle: blog.name,
     authorUrl: blog.url,
     avatar: blog.avatar[0].url,
     date: post.date,

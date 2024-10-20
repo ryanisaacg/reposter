@@ -1,6 +1,6 @@
 export interface Post {
   author: string | null;
-  handle: string | null;
+  handle: string;
   authorUrl: string | null;
   avatar: string | null;
   date: string | null;

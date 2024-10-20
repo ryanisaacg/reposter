@@ -33,8 +33,8 @@ export async function scrapeTumblrPost(tumblrKey, url) {
         .filter((block) => block.type === "text")
         .reduce((combined, block) => combined + block.text + "\n", "");
     return {
-        author: blog.name,
-        handle: null,
+        author: null,
+        handle: blog.name,
         authorUrl: blog.url,
         avatar: blog.avatar[0].url,
         date: post.date,
