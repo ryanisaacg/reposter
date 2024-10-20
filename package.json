@@ -11,12 +11,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsdom": "^21.1.7",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3"
   },
   "dependencies": {
     "@atproto/api": "^0.13.12",
     "dotenv": "^16.4.5",
+    "jsdom": "^25.0.1",
+    "masto": "^6.9.0",
     "microformats-parser": "^2.0.2",
     "tumblr.js": "^5.0.0"
   }

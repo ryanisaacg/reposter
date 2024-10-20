@@ -1,4 +1,5 @@
 import { scrapeBskyPost } from "./bsky";
+import { scrapeMastodon } from "./mastodon";
 import { parseMicroformat } from "./microformat";
 import { Post } from "./post";
 import { scrapeTumblrPost } from "./tumblr";
@@ -27,16 +28,19 @@ export async function scrapePost(
   const resp = await fetch(uri);
   const body = await resp.text();
 
-  return getPostFromHTML(body, uri);
+  return await getPostFromHTML(body, uri);
 }
 
-function getPostFromHTML(html: string, uri: string): Post | null {
-  return parseMicroformat(html, uri);
+async function getPostFromHTML(
+  html: string,
+  uri: string
+): Promise<Post | null> {
+  return parseMicroformat(html, uri) ?? (await scrapeMastodon(html, uri));
 }
 
 console.log(
   await scrapePost(
     { tumblrConsumerKey: process.env.TUMBLR_CONSUMER_KEY },
-    "https://www.tumblr.com/staff/764424099968729088/tumblr-tuesday-heartstopper-fanart"
+    "https://mastodon.social/@Mastodon/113312100548054021"
   )
 );

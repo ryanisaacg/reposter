@@ -51,7 +51,7 @@ export async function scrapeTumblrPost(
 
   return {
     author: blog.name,
-    handle: `@${blog.name}`,
+    handle: null,
     authorUrl: blog.url,
     avatar: blog.avatar[0].url,
     date: post.date,
