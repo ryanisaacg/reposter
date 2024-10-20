@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@atproto/api": "^0.13.12",
-    "microformats-parser": "^2.0.2"
+    "dotenv": "^16.4.5",
+    "microformats-parser": "^2.0.2",
+    "tumblr.js": "^5.0.0"
   }
 }

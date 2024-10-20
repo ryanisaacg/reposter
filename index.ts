@@ -1,11 +1,27 @@
 import { scrapeBskyPost } from "./bsky";
 import { parseMicroformat } from "./microformat";
 import { Post } from "./post";
+import { scrapeTumblrPost } from "./tumblr";
+import dotenv from "dotenv";
 
-export async function scrapePost(uri: string): Promise<Post | null> {
+dotenv.config();
+
+interface Config {
+  tumblrConsumerKey?: string;
+}
+
+export async function scrapePost(
+  config: Config,
+  uri: string
+): Promise<Post | null> {
   const url = new URL(uri);
   if (url.hostname === "bsky.app") {
     return await scrapeBskyPost(url);
+  } else if (
+    url.hostname === "tumblr.com" ||
+    url.hostname.endsWith(".tumblr.com")
+  ) {
+    return await scrapeTumblrPost(config.tumblrConsumerKey, url);
   }
 
   const resp = await fetch(uri);
@@ -19,5 +35,8 @@ function getPostFromHTML(html: string, uri: string): Post | null {
 }
 
 console.log(
-  await scrapePost("https://bsky.app/profile/bsky.app/post/3l6oveex3ii2l")
+  await scrapePost(
+    { tumblrConsumerKey: process.env.TUMBLR_CONSUMER_KEY },
+    "https://www.tumblr.com/staff/764424099968729088/tumblr-tuesday-heartstopper-fanart"
+  )
 );
