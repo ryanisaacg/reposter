@@ -11,7 +11,7 @@ export function parseMicroformat(html, uri) {
         .find((item) => item.type?.includes("h-card"))?.properties ?? {};
     return {
         author: propertyString(author),
-        handle: null,
+        handle: new URL(uri).hostname,
         authorUrl: propertyString(authorUrl),
         avatar: propertyString(avatar),
         date: propertyString(date),
