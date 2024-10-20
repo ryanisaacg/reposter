@@ -29,7 +29,7 @@ export function parseMicroformat(html: string, uri: string): Post | null {
 
   return {
     author: propertyString(author),
-    handle: null,
+    handle: new URL(uri).hostname,
     authorUrl: propertyString(authorUrl),
     avatar: propertyString(avatar),
     date: propertyString(date),
