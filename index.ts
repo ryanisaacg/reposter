@@ -3,9 +3,6 @@ import { scrapeMastodon } from "./mastodon";
 import { parseMicroformat } from "./microformat";
 import { Post } from "./post";
 import { scrapeTumblrPost } from "./tumblr";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 interface Config {
   tumblrConsumerKey?: string;
@@ -37,10 +34,3 @@ async function getPostFromHTML(
 ): Promise<Post | null> {
   return parseMicroformat(html, uri) ?? (await scrapeMastodon(html, uri));
 }
-
-console.log(
-  await scrapePost(
-    { tumblrConsumerKey: process.env.TUMBLR_CONSUMER_KEY },
-    "https://mastodon.social/@Mastodon/113312100548054021"
-  )
-);
